@@ -3,9 +3,10 @@ import Matter from 'matter-js'
 import {View} from "react-native";
 
 
-export default function Bird(world, color, pos, size) {
 
-    const Bird = props => {
+export default function Floor(world, color, pos, size) {
+
+    const Floor = props => {
         const widthBody = props.body.bounds.max.x - props.body.bounds.min.x
         const heightBody = props.body.bounds.max.y - props.body.bounds.min.y
 
@@ -17,9 +18,7 @@ export default function Bird(world, color, pos, size) {
         return(
             <View
                 style={{
-                    borderWidth:1,
-                    borderColor: color,
-                    borderStyle: 'solid',
+                    backgroundColor: color,
                     position: 'absolute',
                     left: xBody,
                     top: yBody,
@@ -30,20 +29,21 @@ export default function Bird(world, color, pos, size) {
         )
     }
 
-    const initialBird = Matter.Bodies.rectangle(
+    const initialFloor = Matter.Bodies.rectangle(
         pos.x,
         pos.y,
         size.width,
         size.height,
-        {label: 'Bird'}
+        {label: 'Floor',
+        isStatic: true}
     )
 
-    Matter.World.add(world, initialBird)
+    Matter.World.add(world, initialFloor)
 
     return{
-        body: initialBird,
+        body: initialFloor,
         color,
         pos,
-        renderer: <Bird/>
+        renderer: <Floor/>
     }
 }

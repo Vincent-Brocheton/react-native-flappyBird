@@ -3,9 +3,9 @@ import Matter from 'matter-js'
 import {View} from "react-native";
 
 
-export default function Bird(world, color, pos, size) {
+export default function Obstacle(world, label, color, pos, size) {
 
-    const Bird = props => {
+    const Obstacle = props => {
         const widthBody = props.body.bounds.max.x - props.body.bounds.min.x
         const heightBody = props.body.bounds.max.y - props.body.bounds.min.y
 
@@ -30,20 +30,20 @@ export default function Bird(world, color, pos, size) {
         )
     }
 
-    const initialBird = Matter.Bodies.rectangle(
+    const initialObstacle = Matter.Bodies.rectangle(
         pos.x,
         pos.y,
         size.width,
         size.height,
-        {label: 'Bird'}
+        {label, isStatic: true}
     )
 
-    Matter.World.add(world, initialBird)
+    Matter.World.add(world, initialObstacle)
 
     return{
-        body: initialBird,
+        body: initialObstacle,
         color,
         pos,
-        renderer: <Bird/>
+        renderer: <Obstacle/>
     }
 }
